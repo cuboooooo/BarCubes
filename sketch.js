@@ -113,7 +113,9 @@ function preload(){
   document.body.appendChild(spacingInput);
   function spacingSubmit() {
   const inputValue = spacingInput.value;
-  spacing = int(inputValue);
+    if (!isNaN(int(inputValue))){
+      spacing = int(inputValue);
+    }
 }
 spacingInput.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
@@ -130,7 +132,7 @@ spacingInput.addEventListener('keydown', function(event) {
   document.body.appendChild(textInput);
   function textSubmit() {
   const textValue = textInput.value;
-    startVar = textValue;
+    startVar = textValue.toLowerCase();
     spaceSpaces = [];
   setup();
 }
@@ -141,6 +143,11 @@ textInput.addEventListener('keydown', function(event) {
 });
   
   
+  text = document.createElement('p');
+  text.style = "color:#eee;font-family:Helvetica,Arial,sans-serif;";
+  text.innerText = "I suppose I should explain. At my house we have these cubes that when flipped to the same-color sides, can spell 'Merry Christmas' and 'Happy Easter', etc. It became a fun joke to see what else we could spell with these cubes, which wasn't the easiest process, but it was fun. I decided to ruin that by creating this algorithm and visualizer that checks if any given phrase can be spelled with the cubes, and then uses p5 to visualize these cubes in 3D. The whole scene can be rotated, zoomed, and moved and if you increase the Spacing Value, it can help to see the sides of the cubes to identify them. I had originally wrote this as a python console program, but decided to painstakingly port it over to JS and visualize it. This is useful to absolutely no one except my family. Nevertheless, I am adding it to my portfolio as it was a fun challenge to create an algorithm to check the phrases. This is barely idiot proofed, just tell me if theres an error, it won't be too hard to fix."
+    document.body.appendChild(text);
+
 }
 function setup() {
   createCanvas(400, 400, WEBGL);
