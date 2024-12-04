@@ -7,7 +7,7 @@
 // an unsorted list of lists, each containing in the first 6 indices the literal letters on each block
 // All in orientation order: red, white, yellow, green, grey, orange
 
-let startVar = "fire me up barons"
+let startVar = "welcome family"
 let spacing = 5
 
 let configured
