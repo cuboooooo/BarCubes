@@ -1,34 +1,33 @@
-//// I HATE CONVERTING FROM PYTHON TO JS RAHHHHHHHHH
-// the swap part isnt working rn 
-// it works in python :D
-
 
 
 // an unsorted list of lists, each containing in the first 6 indices the literal letters on each block
 // All in orientation order: red, white, yellow, green, grey, orange
 
-let startVar = "welcome family"
+let startVar = "fire me up barons"
 let spacing = 5
 
 let configured
 let remaining
 
+  // 0     2      4       5      3     1
+
 let blocks = [
-    ["T","h","b","h","t","a"],
-    ["a","l","a","e","e","a"],
-    ["y","s","e","y","b","y"],
-    ["h","b","e","m","l","h"],
-    ["u","u","i","m","f","e"],
-    ["y","e","g","s","l","n"],
-    ["4","t","r","c","e","h"],
-    ["f","h","s","s","n","o"],
-    ["l","s","n","a","u","e"],
-    ["p","e","s","r","t","p"],
-    ["s","p","r","t","p","s"],
-    ["o","s","e","i","a","l"],
-    ["H","i","l","r","h","l"],
-    ["j","o","s","t","k","w"], 
-]
+["T","b","t","a","h","h",],
+["a","a","e","a","e","l",],
+["y","e","b","y","y","s",],
+["h","e","l","h","m","b",],
+["u","i","f","e","m","u",],
+["y","g","l","n","s","e",],
+["4","r","e","h","c","t",],
+["f","s","n","o","s","h",],
+["l","n","u","e","a","s",],
+["p","s","t","p","r","e",],
+["p","t","s","p","r","s",],
+["o","e","a","l","i","s",],
+["H","l","h","l","r","i",],
+["j","s","k","w","t","o",],
+] 
+
 
 let reaches = { // letters that can be made by rotating the original letters, or inferring them in a new context.
     "a": ['v', 'c'],
@@ -61,9 +60,10 @@ let reaches = { // letters that can be made by rotating the original letters, or
     "T": [], // lowercase t
 }
 // [text, background]
-let colors = [["white", "red"], ["Navy", "white"], ["yellow", "MediumPurple"], ["red", "green"], ["orange", "#242424"], ["black", "orange"]]
+  // 0     2      4       5      3     1
 
-let block_key = "Fourth of July, Bless our home, Happy Easter, Merry Christmas, Happy Thanksgiving, Happy Halloween"
+
+let colors = [["white","red",],["MediumPurple","#FFFF6E"],["orange","#242424",],["black","orange",],["red","green",],["Navy","white",],] 
 
 let spaceSpaces = []
 
@@ -145,7 +145,7 @@ textInput.addEventListener('keydown', function(event) {
   
   text = document.createElement('p');
   text.style = "color:#eee;font-family:Helvetica,Arial,sans-serif;";
-  text.innerHTML = "I suppose I should explain. At my house we have these cubes that when flipped to the same-color sides, can spell 'Merry Christmas' and 'Happy Easter', etc. It became a fun joke to see what else we could spell with these cubes, which wasn't the easiest process, but it was fun. I decided to ruin that by creating this algorithm and visualizer that checks if any given phrase can be spelled with the cubes, and then uses p5 to visualize these cubes in 3D. The whole scene can be rotated, zoomed, and moved and if you increase the Spacing Value, it can help to see the sides of the cubes to identify them. I had originally wrote this as a python console program, but decided to painstakingly port it over to JS and visualize it. This is useful to absolutely no one except my family. Nevertheless, I am adding it to my portfolio as it was a fun challenge to create an algorithm to check the phrases. This is barely idiot proofed, just tell me if theres an error, it won't be too hard to fix.<br><br>Also if your phrase isn't possible, get creative! There are no D's! an upside down P can look like a d, so put that into the phrase and see if it works! An upside down A looks like a V, a sideways N looks like a Z, etc etc. Try some stretches like that for far more possibilties."
+  text.innerText = "I suppose I should explain. At my house we have these cubes that when flipped to the same-color sides, can spell 'Merry Christmas' and 'Happy Easter', etc. It became a fun joke to see what else we could spell with these cubes, which wasn't the easiest process, but it was fun. I decided to ruin that by creating this algorithm and visualizer that checks if any given phrase can be spelled with the cubes, and then uses p5 to visualize these cubes in 3D. The whole scene can be rotated, zoomed, and moved and if you increase the Spacing Value, it can help to see the sides of the cubes to identify them. I had originally wrote this as a python console program, but decided to painstakingly port it over to JS and visualize it. This is useful to absolutely no one except my family. Nevertheless, I am adding it to my portfolio as it was a fun challenge to create an algorithm to check the phrases. This is barely idiot proofed, just tell me if theres an error, it won't be too hard to fix."
     document.body.appendChild(text);
 
 }
@@ -222,6 +222,9 @@ for (let goal_idx of new Array(goal.length).keys()){ // for each letter in the g
                                 let temp_conf_block_letter_idx = temp_conf_block.indexOf(goal_letter)
                                 console.log(temp_conf_block_letter_idx)
                                 configured[goal_idx] = [temp_conf_block, temp_conf_block_letter_idx] // variable names getting a bit lengthy, but ill take it for readability with this awful code
+                              // remove the reamining block from reamining
+                              remaining.splice(remaining_block_idx, 1)
+                              
                                 letter_found = true
                                 swap_success = true
                                 console.log(configured)
@@ -315,8 +318,8 @@ function drawCube(loc, letters, orientation){
     pop();
     pop();
   } else {
-  let colors = [["white", "red"], ["Navy", "white"], ["yellow", "MediumPurple"], ["red", "green"], ["orange", "#242424"], ["black", "orange"]]
-  
+
+let colors = [["white","red",],["MediumPurple","#FFFF6E"],["orange","#242424",],["black","orange",],["red","green",],["Navy","white",],]   
   // rotate the cube , not by actaully rotating it, but by rotating the arrays.
   colors = colors.slice(orientation).concat(colors.slice(0, orientation));
   letters = letters.slice(orientation).concat(letters.slice(0, orientation));
@@ -353,21 +356,22 @@ function drawCube(loc, letters, orientation){
 
 // Function to position each face of the cube
 function translateFace(faceIndex) {
+  // 0     1      2       3      4     5
+  // front back   right   left   top   bottom
+  // red,  white, yellow, green, grey, orange
+  //canonically if red is front, left is orange, bottom is white. top is green, grey is right, yellow is back
+  // therefore to cheese it so it looks right....
+  
+  // front back   right   left   top   bottom
+  // 0     2      4       5      3     1
+  // red,  yellow, grey, orange, green, white
   switch (faceIndex) {
     case 0: translate(0, 0, cubeSize); break; // Front
     case 1: translate(0, 0, -cubeSize); rotateY(PI); break; // Back
     case 2: translate(cubeSize, 0, 0); rotateY(HALF_PI); break; // Right
     case 3: translate(-cubeSize, 0, 0); rotateY(-HALF_PI); break; // Left
-    case 4: 
-      translate(0, -cubeSize, 0); 
-      rotateX(-HALF_PI); 
-      scale(1, -1); // Flip texture vertically for Top
-      break; 
-    case 5: 
-      translate(0, cubeSize, 0); 
-      rotateX(HALF_PI); 
-      scale(1, -1); // Flip texture vertically for Bottom
-      break; 
+    case 4: translate(0, -cubeSize, 0); rotateX(-HALF_PI); scale(1, -1); break; // Top
+    case 5: translate(0, cubeSize, 0); rotateX(HALF_PI); scale(1, -1); break; // Bottom
   }
 }
 
